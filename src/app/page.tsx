@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
+import SignInOutButtons from "@/components/layout/AuthButtons/SignInOutButtons";
 
 export default function Home() {
     return (
         <div>
             <h1>Home page</h1>
-            <Button>Hello</Button>
+            <SignInOutButtons />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import { HomeIcon } from "lucide-react";
 import Link from "next/link";
-import { buttonVariants } from "../ui/button";
+import SignInOutButtons from "./AuthButtons/SignInOutButtons";
 
 export default function NavBar() {
     return (
@@ -14,12 +14,7 @@ export default function NavBar() {
             </Link>
 
             {/* Sign-In button */}
-            <Link
-                href="/sign-in"
-                className={buttonVariants({ variant: "secondary" })}
-            >
-                Sign-In
-            </Link>
+            <SignInOutButtons />
         </div>
     );
 }

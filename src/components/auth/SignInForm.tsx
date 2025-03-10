@@ -16,8 +16,14 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { signInFormSchema } from "@/lib/zod-schemas/auth-schemas";
+import { toast } from "sonner";
+import { authClient } from "@/lib/auth/auth-client";
+
+import { useRouter } from "next/navigation";
 
 export default function SignInForm() {
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof signInFormSchema>>({
         resolver: zodResolver(signInFormSchema),
         defaultValues: {
@@ -26,8 +32,30 @@ export default function SignInForm() {
         },
     });
 
-    function onSubmit(values: z.infer<typeof signInFormSchema>) {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof signInFormSchema>) {
+        const { email, password } = values;
+        await authClient.signIn.email(
+            {
+                email,
+                password,
+            },
+            {
+                onRequest: () => {
+                    toast.info("Signing in…");
+                },
+                onSuccess: () => {
+                    toast.success("Sign-in completed!", {
+                        description:
+                            "You are being redirected to the dashboard...",
+                    });
+                    form.reset();
+                    router.push("/dashboard");
+                },
+                onError: () => {
+                    toast.error("Failed to login!");
+                },
+            }
+        );
     }
 
     return (
