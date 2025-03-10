@@ -13,12 +13,12 @@ export const signUpFormSchema = z
 
         password: z
             .string()
-            .min(2, { message: "Password must be at least 2 characters long" })
+            .min(9, { message: "Password must be at least 9 characters long" })
             .max(50, { message: "Password cannot exceed 50 characters"}),
 
         passwordConfirmation: z
             .string()
-            .min(2, { message: "Password must be at least 2 characters long" })
+            .min(9, { message: "Password must be at least 9 characters long" })
             .max(50, { message: "Password cannot exceed 50 characters"}),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
@@ -35,7 +35,7 @@ export const signInFormSchema = z
 
         password: z
             .string()
-            .min(2, { message: "Password must be at least 2 characters long" })
+            .min(9, { message: "Password must be at least 9 characters long" })
             .max(50, { message: "Password cannot exceed 50 characters"}),
 });
 

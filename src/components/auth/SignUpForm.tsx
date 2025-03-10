@@ -17,8 +17,14 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { signUpFormSchema } from "@/lib/zod-schemas/auth-schemas";
+import { authClient } from "@/lib/auth/auth-client";
+import { toast } from "sonner";
+
+import { useRouter } from "next/navigation";
 
 export default function SignUpForm() {
+    const router = useRouter();
+
     const form = useForm<z.infer<typeof signUpFormSchema>>({
         resolver: zodResolver(signUpFormSchema),
         defaultValues: {
@@ -29,8 +35,31 @@ export default function SignUpForm() {
         },
     });
 
-    function onSubmit(values: z.infer<typeof signUpFormSchema>) {
-        console.log(values);
+    async function onSubmit(values: z.infer<typeof signUpFormSchema>) {
+        const { name, email, password } = values;
+        await authClient.signUp.email(
+            {
+                email,
+                password,
+                name,
+            },
+            {
+                onRequest: () => {
+                    toast.info("Account creation…");
+                },
+                onSuccess: () => {
+                    toast.success("Account created!", {
+                        description:
+                            "You are being redirected to the sign-in form...",
+                    });
+                    form.reset();
+                    router.push("/sign-in");
+                },
+                onError: () => {
+                    toast.error("Failed to create account!");
+                },
+            }
+        );
     }
 
     return (
