@@ -1,22 +1,24 @@
 import { auth } from "@/lib/auth/auth";
 import { headers } from "next/headers";
-import { Card, CardContent } from "../ui/card";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default async function UserDetails() {
     const session = await auth.api.getSession({
         headers: await headers(),
     });
 
-    if (!session) {
-        console.log("session null !!!");
-    }
-
     return (
-        <Card>
-            <CardContent>
-                <h2 className="font-semibold">User details</h2>
-                <p>{session?.user.email}</p>
-            </CardContent>
-        </Card>
+        <div
+            className={`flex items-center justify-center gap-2 hover:${session?.user.email}`}
+        >
+            <Avatar>
+                <AvatarImage src={session?.user.image || undefined} />
+                <AvatarFallback>
+                    {session?.user.name?.trim()?.charAt(0).toUpperCase() || "?"}
+                </AvatarFallback>
+            </Avatar>
+            <p>{session?.user.name}</p>
+        </div>
     );
 }

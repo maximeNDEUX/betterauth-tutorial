@@ -3,8 +3,9 @@
 import Form from "next/form";
 import { Button } from "@/components/ui/button";
 import { authClient } from "@/lib/auth/auth-client";
-// import { header } from "next/headers";
 import { redirect } from "next/navigation";
+
+import fr from "@/locales/fr";
 
 export default function SignOutButton() {
     return (
@@ -15,7 +16,7 @@ export default function SignOutButton() {
             }}
         >
             <Button type="submit" variant={"destructive"}>
-                Sign-Out
+                {fr.auth.logout}
             </Button>
         </Form>
     );

@@ -9,14 +9,18 @@ import {
 } from "@/components/ui/card";
 
 import SignUpForm from "@/components/auth/SignUpForm";
+import { UserPlusIcon } from "lucide-react";
 
 export default function SignInPage() {
     return (
         <Card className="w-full max-w-md mx-auto">
             <CardHeader>
-                <CardTitle>Sign Up</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                    <UserPlusIcon />
+                    Création de compte
+                </CardTitle>
                 <CardDescription>
-                    Create your account to get started.
+                    Créez un compte pour accéder à l&apos;application
                 </CardDescription>
             </CardHeader>
 
@@ -26,12 +30,12 @@ export default function SignInPage() {
 
             <CardFooter className="flex justify-center">
                 <p className="text-muted-foreground">
-                    Do you already have an account?{" "}
+                    Vous avez déjà un compte ?{" "}
                     <Link
                         href="/sign-in"
                         className="text-primary hover:underline"
                     >
-                        Sign in here
+                        Connectez-vous ici
                     </Link>
                 </p>
             </CardFooter>

@@ -1,41 +1,31 @@
 import { z } from "zod";
+import fr from "@/locales/fr";
 
 export const signUpFormSchema = z
     .object({
         name: z
             .string()
-            .min(2, { message: "Name must be at least 2 characters long" })
-            .max(50, { message: "Name cannot exceed 50 characters"}),
+            .min(3, { message: fr.auth.zod.userNameMinLength })
+            .max(50, { message: fr.auth.zod.userNameMaxLength }),
 
-        email: z
-            .string()
-            .email( { message: "Please enter a valid email address"} ),
+        email: z.string().email({ message: fr.auth.zod.emailInvalid }),
 
         password: z
             .string()
-            .min(9, { message: "Password must be at least 9 characters long" })
-            .max(50, { message: "Password cannot exceed 50 characters"}),
+            .min(9, { message: fr.auth.zod.passwordMinLength })
+            .max(50, { message: fr.auth.zod.passwordMaxLength }),
 
         passwordConfirmation: z
             .string()
-            .min(9, { message: "Password must be at least 9 characters long" })
-            .max(50, { message: "Password cannot exceed 50 characters"}),
+            .min(1, { message: fr.auth.zod.passwordConfirmationRequired }),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-        message: "Passwords do not match",
+        message: fr.auth.zod.passwordConfirmationMatch,
         path: ["passwordConfirmation"],
+    });
+
+export const signInFormSchema = z.object({
+    email: z.string().email({ message: fr.auth.zod.emailInvalid }),
+
+    password: z.string().min(1, { message: fr.auth.zod.passwordRequired }),
 });
-
-
-export const signInFormSchema = z
-    .object({
-        email: z
-            .string()
-            .email( { message: "Please enter a valid email address"} ),
-
-        password: z
-            .string()
-            .min(9, { message: "Password must be at least 9 characters long" })
-            .max(50, { message: "Password cannot exceed 50 characters"}),
-});
-

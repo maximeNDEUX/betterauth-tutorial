@@ -3,13 +3,13 @@ import { buttonVariants } from "@/components/ui/button";
 
 import fr from "@/locales/fr";
 
-export default function SignInButton() {
+export default function SignUpButton() {
     return (
         <Link
-            href="/sign-in"
-            className={buttonVariants({ variant: "outline" })}
+            href="/sign-up"
+            className={buttonVariants({ variant: "secondary" })}
         >
-            {fr.auth.signIn.button}
+            {fr.auth.signUp.button}
         </Link>
     );
 }

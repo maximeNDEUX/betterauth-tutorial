@@ -1,6 +1,7 @@
 import { HomeIcon } from "lucide-react";
 import Link from "next/link";
 import SignInOutButtons from "./AuthButtons/SignInOutButtons";
+import UserDetails from "./UserDetails";
 
 export default function NavBar() {
     return (
@@ -9,12 +10,14 @@ export default function NavBar() {
             <Link href="/" className="hover:underline">
                 <div className="flex items-center gap-2">
                     <HomeIcon className="h-6 w-6" />
-                    <span className="font-semibold">Home</span>
+                    <span className="font-semibold">Accueil</span>
                 </div>
             </Link>
 
-            {/* Sign-In button */}
-            <SignInOutButtons />
+            <div className="flex items-center justify-center gap-8">
+                <UserDetails />
+                <SignInOutButtons />
+            </div>
         </div>
     );
 }

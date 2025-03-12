@@ -10,13 +10,19 @@ import {
 
 import SignInForm from "@/components/auth/SignInForm";
 
+import { UserCheckIcon } from "lucide-react";
+import fr from "@/locales/fr";
+
 export default function SignInPage() {
     return (
         <Card className="w-full max-w-md mx-auto">
             <CardHeader>
-                <CardTitle>Sign In</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                    <UserCheckIcon />
+                    {fr.auth.signIn.form.title}
+                </CardTitle>
                 <CardDescription>
-                    Welcome back! Please sign in to continue.
+                    {fr.auth.signIn.form.description}
                 </CardDescription>
             </CardHeader>
 
@@ -26,12 +32,12 @@ export default function SignInPage() {
 
             <CardFooter className="flex justify-center">
                 <p className="text-muted-foreground">
-                    Don&apos;t have account yet?{" "}
+                    {fr.auth.signIn.form.noAccountYet}{" "}
                     <Link
                         href="/sign-up"
                         className="text-primary hover:underline"
                     >
-                        Sign up here
+                        {fr.auth.signIn.form.accountCreationLink}
                     </Link>
                 </p>
             </CardFooter>

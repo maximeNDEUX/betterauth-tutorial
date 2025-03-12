@@ -21,6 +21,9 @@ import { authClient } from "@/lib/auth/auth-client";
 
 import { useRouter } from "next/navigation";
 
+import { KeyRoundIcon, LogInIcon, MailIcon } from "lucide-react";
+import fr from "@/locales/fr";
+
 export default function SignInForm() {
     const router = useRouter();
 
@@ -41,18 +44,19 @@ export default function SignInForm() {
             },
             {
                 onRequest: () => {
-                    toast.info("Signing in…");
+                    toast.info(fr.auth.signIn.status.pending);
                 },
                 onSuccess: () => {
-                    toast.success("Sign-in completed!", {
-                        description:
-                            "You are being redirected to the dashboard...",
+                    toast.success(fr.auth.signIn.status.successTitle, {
+                        description: fr.auth.signIn.status.successRedirection,
                     });
                     form.reset();
                     router.push("/dashboard");
                 },
                 onError: () => {
-                    toast.error("Failed to login!");
+                    toast.error(fr.auth.signIn.status.errorTitle, {
+                        description: fr.auth.signIn.status.errorDescription,
+                    });
                 },
             }
         );
@@ -67,10 +71,15 @@ export default function SignInForm() {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>
+                                <MailIcon className="h-4 w-4" />
+                                {fr.auth.formItem.email.title}
+                            </FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="email@example.com"
+                                    placeholder={
+                                        fr.auth.formItem.email.placeholder
+                                    }
                                     {...field}
                                 />
                             </FormControl>
@@ -84,11 +93,16 @@ export default function SignInForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>
+                                <KeyRoundIcon className="h-4 w-4" />
+                                {fr.auth.formItem.password.title}
+                            </FormLabel>
                             <FormControl>
                                 <Input
                                     type="password"
-                                    placeholder="Your password"
+                                    placeholder={
+                                        fr.auth.formItem.password.placeholder
+                                    }
                                     {...field}
                                 />
                             </FormControl>
@@ -97,7 +111,8 @@ export default function SignInForm() {
                     )}
                 />
                 <Button type="submit" className="w-full my-2">
-                    Sign In
+                    <LogInIcon />
+                    {fr.auth.signIn.button}
                 </Button>
             </form>
         </Form>

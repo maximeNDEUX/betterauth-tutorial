@@ -19,8 +19,9 @@ import { Input } from "@/components/ui/input";
 import { signUpFormSchema } from "@/lib/zod-schemas/auth-schemas";
 import { authClient } from "@/lib/auth/auth-client";
 import { toast } from "sonner";
-
 import { useRouter } from "next/navigation";
+
+import fr from "@/locales/fr";
 
 export default function SignUpForm() {
     const router = useRouter();
@@ -45,18 +46,19 @@ export default function SignUpForm() {
             },
             {
                 onRequest: () => {
-                    toast.info("Account creation…");
+                    toast.info(fr.auth.signUp.status.pending);
                 },
                 onSuccess: () => {
-                    toast.success("Account created!", {
-                        description:
-                            "You are being redirected to the sign-in form...",
+                    toast.success(fr.auth.signUp.status.successTitle, {
+                        description: fr.auth.signUp.status.successRedirection,
                     });
                     form.reset();
                     router.push("/sign-in");
                 },
                 onError: () => {
-                    toast.error("Failed to create account!");
+                    toast.error(fr.auth.signUp.status.errorTitle, {
+                        description: fr.auth.signUp.status.errorDescription,
+                    });
                 },
             }
         );
@@ -71,12 +73,19 @@ export default function SignUpForm() {
                     name="name"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>
+                                {fr.auth.formItem.userName.title}
+                            </FormLabel>
                             <FormControl>
-                                <Input placeholder="Your name" {...field} />
+                                <Input
+                                    placeholder={
+                                        fr.auth.formItem.userName.placeholder
+                                    }
+                                    {...field}
+                                />
                             </FormControl>
                             <FormDescription>
-                                This is your public display name.
+                                {fr.auth.formItem.userName.description}
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -88,10 +97,14 @@ export default function SignUpForm() {
                     name="email"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Email</FormLabel>
+                            <FormLabel>
+                                {fr.auth.formItem.email.title}
+                            </FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="email@example.com"
+                                    placeholder={
+                                        fr.auth.formItem.email.placeholder
+                                    }
                                     {...field}
                                 />
                             </FormControl>
@@ -105,11 +118,15 @@ export default function SignUpForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>
+                                {fr.auth.formItem.password.title}
+                            </FormLabel>
                             <FormControl>
                                 <Input
                                     type="password"
-                                    placeholder="Your password"
+                                    placeholder={
+                                        fr.auth.formItem.password.placeholder
+                                    }
                                     {...field}
                                 />
                             </FormControl>
@@ -123,11 +140,16 @@ export default function SignUpForm() {
                     name="passwordConfirmation"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>Password Confirmation</FormLabel>
+                            <FormLabel>
+                                {fr.auth.formItem.passwordConfirmation.title}
+                            </FormLabel>{" "}
                             <FormControl>
                                 <Input
                                     type="password"
-                                    placeholder="Password Confirmation"
+                                    placeholder={
+                                        fr.auth.formItem.passwordConfirmation
+                                            .placeholder
+                                    }
                                     {...field}
                                 />
                             </FormControl>
@@ -136,7 +158,7 @@ export default function SignUpForm() {
                     )}
                 />
                 <Button type="submit" className="w-full my-2">
-                    Sign Up
+                    {fr.auth.signUp.button}
                 </Button>
             </form>
         </Form>
