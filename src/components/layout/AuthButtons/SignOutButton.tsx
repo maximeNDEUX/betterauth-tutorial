@@ -1,17 +1,16 @@
+"use client";
+
 import Form from "next/form";
 import { Button } from "@/components/ui/button";
-import { auth } from "@/lib/auth/auth";
-import { headers } from "next/headers";
+import { authClient } from "@/lib/auth/auth-client";
+// import { header } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default function SignOutButton() {
     return (
         <Form
-            action={async () => {
-                "use server";
-                await auth.api.signOut({
-                    headers: await headers(),
-                });
+            action={() => {
+                authClient.signOut();
                 redirect("/");
             }}
         >
