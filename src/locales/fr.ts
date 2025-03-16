@@ -72,6 +72,17 @@ const fr = {
         welcome: "Bienvenue, {name} !",
         upload: "Téléverser une image",
     },
+    layout: {
+        toggleButton: {
+            light: "Clair",
+            dark: "Sombre",
+            system: "Système",
+        },
+    },
+    branding: {
+        appNamePart1: "Eternal",
+        appNamePart2: "Snap",
+    },
 };
 
 export default fr;

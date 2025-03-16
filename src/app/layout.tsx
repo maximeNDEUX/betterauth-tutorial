@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const metadata: Metadata = {
     title: "BetterAuth Demo",
@@ -14,10 +15,17 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="fr">
+        <html lang="fr" suppressHydrationWarning>
             <body className="antialiased mx-">
-                <main>{children}</main>
-                <Toaster closeButton={true} />
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    {children}
+                    <Toaster closeButton={true} />
+                </ThemeProvider>
             </body>
         </html>
     );
