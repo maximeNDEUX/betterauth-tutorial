@@ -4,7 +4,7 @@ import Link from "next/link";
 import fr from "@/locales/fr";
 // import { Button } from "@/components/ui/button";
 
-export default function HomeButton() {
+export default function LogoButton() {
     return (
         <Link
             href="/"

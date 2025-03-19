@@ -22,7 +22,7 @@ const fr = {
                 title: "Enregistrez-vous",
                 description: "Créez un compte afin d'accéder à l'application",
                 alreadySignedIn: "Vous avez un compte ?",
-                accountCreationLink: "Connectez-vous ici",
+                signInLink: "Connectez-vous ici",
             },
             status: {
                 pending: "Enregistrement...",
@@ -64,8 +64,21 @@ const fr = {
                 "Confirmation du mot de passe requise",
             passwordConfirmationMatch: "Les mots de passe ne correspondent pas",
         },
-
-        logout: "Déconnexion",
+        signOut: {
+            status: {
+                pending: "Déconnexion...",
+                successTitle: "Déconnecté !",
+                successDescription: "Votre session a été terminée.",
+                errorTitle: "Erreur !",
+                errorDescription: "Réessayez plus tard.",
+            },
+            button: "Déconnexion",
+            page: {
+                title: "Vous êtes déconnecté",
+                description:
+                    "Afin d'utiliser l'application, vous devez vous connecter.",
+            },
+        },
         registerBouton: "S'inscrire",
     },
     dashboard: {
@@ -82,6 +95,9 @@ const fr = {
     branding: {
         appNamePart1: "Eternal",
         appNamePart2: "Snap",
+    },
+    ui: {
+        homeButton: "Retour à l'accueil",
     },
 };
 
